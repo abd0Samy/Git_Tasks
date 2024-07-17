@@ -19,7 +19,7 @@ goto loop
 
 IF %ERRORLEVEL% equ 1 (
 
-"%java_path%" -Dorg.jenkinsci.plugins.gitclient.Git.timeOut=1100 -jar agent.jar -jnlpUrl https://%master_name%:8443/computer/%host%/jenkins-agent.jnlp -secret 9d7978dc78df0f5216f47a3251f41f08f4de2fc0a2b5764369ce405a87061e1c -workDir "C:\Jenkins"
+"%java_path%" -Dorg.jenkinsci.plugins.gitclient.Git.timeOut=1100 -jar agent.jar -jnlpUrl https://%master_name%:8443/computer/%host%/jenkins-agent.jnlp -secret 5a5f381260f7d0926aedb3a815c5c644ae346a0c1bce1c84b97ff27be3faf8bf -workDir "C:\Jenkins"
 timeout /t 15 /nobreak
 goto loop
 )
