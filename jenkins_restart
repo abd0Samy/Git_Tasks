@@ -1,0 +1,24 @@
+# Define the service name
+$serviceName = "jenkinsslave-D_Jenkins"
+
+# Get the system event logs for the service start and stop events
+$logs = Get-WinEvent -LogName System | Where-Object {
+    ($_.Id -eq 7036 -or $_.Id -eq 7034) -and $_.Message -like "*$serviceName*"
+}
+
+# Filter and display the logs
+$logs | ForEach-Object {
+    $eventTime = $_.TimeCreated
+    $eventMessage = $_.Message
+    $eventId = $_.Id
+
+    if ($eventId -eq 7036) {
+        if ($eventMessage -like "*entered the running state*") {
+            Write-Output "$eventTime - Service '$serviceName' started"
+        } elseif ($eventMessage -like "*entered the stopped state*") {
+            Write-Output "$eventTime - Service '$serviceName' stopped"
+        }
+    } elseif ($eventId -eq 7034) {
+        Write-Output "$eventTime - Service '$serviceName' terminated unexpectedly"
+    }
+}
